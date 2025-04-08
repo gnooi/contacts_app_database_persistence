@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contacts App</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+      <title>{% block title %}Contacts{% endblock %}</title>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="header-top">
+        <h1>Contacts App</h1>
+        <div class="header-links">
+          {% block header_links %}
+          {% endblock %}
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        {% block header_actions %}
+        {% endblock %}
+      </div>  
+    </header>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class="flash {{ category }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endif %}
+      {% endwith %}
+      
+      {% block content %}{% endblock %}
+
+  </body>
+</html>

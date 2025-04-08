@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <section id="categories">
+    <header>
+      <h3>Editing '{{ category.title }}'</h3>
+      <form action="{{ url_for('update_category', category_id=category.id) }}" method="post">
+        <label for="category_title">Enter the new category title:</label>
+        <input type="text" name="category_title" placeholder="Category Title"
+            value="{{ title if title is defined else category.title }}">
+
+        <class="actions">
+          <input type="submit" value="Save">
+          <a href="{{ url_for('show_category', category_id=category.id) }}">
+            <button type="button">Cancel</button>
+          </a>
+      </form>
+{% endblock %}

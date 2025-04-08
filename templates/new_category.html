@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <form action="{{ url_for('create_category') }}" method="post">
+    <dl>
+        <label for="category_title">Create a category for your new contact:</label>
+        <input type="text" name="category_title" placeholder="Category title" value="{{ title }}">
+    </dl>
+    <div class="actions">
+      <input type="submit" value="Save">
+      <a href="{{ url_for('get_categories') }}">
+        <button type="button">Cancel</button>
+      </a>
+    </div>
+  </form>
+{% endblock %}

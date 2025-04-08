@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section id="contacts">
+  <header>
+    <h2>{{ category.title }}</h2>
+    <div class="header-actions">
+      <form class="add-contact"
+          method="POST"
+          action="{{ url_for('create_contact', category_id=category.id) }}">
+        
+        <div class="input-fields">
+          <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name" required>
+          </div>
+
+          <div>
+            <label for="phone">Phone: </label>
+            <input type="tel" name="phone" id="phone">
+          </div>
+
+          <div>
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email">
+          </div>
+          <button type="submit">Add new contact</button>
+      </div>
+      </form>
+    </div>
+  </header>
+</section>
+    {% if category.contacts %}
+      <section class="contact-list">
+        {% for contact in category.contacts %}
+          <article class="contact-card">
+            <h3><a href="{{ url_for('contact_info', category_id=category.id, contact_id=contact.id) }}">{{ contact.name }}</a></h3>
+          </article>
+        {% endfor %}
+      </section>
+    {% else %}
+      <p class="empty-state">No contacts yet. Click "Add new contact" to get started!</p>
+    {% endif %}
+  </section>
+
+  <section id="category-actions">
+    <div class="category-actions">
+      <form class="edit-category"
+            action="{{ url_for('edit_category', category_id=category.id) }}"
+            method="post">
+        <button type="submit">Edit category</button>
+      </form>
+      <form class="delete-category"
+            action="{{ url_for('delete_category', category_id=category.id)}}"
+            method="post">
+        <button type="submit">Delete category</button>
+      </form>
+      <form class="delete-all-contacts"
+            action="{{ url_for('delete_all_contacts', category_id=category.id)}}"
+            method="post">
+    
+        <button type="submit">Delete all contacts</button>
+      </form>
+    </div>
+  </section>
+{% endblock %}
+
+{% block header_links %}
+  <form action="{{ url_for('get_categories') }}" method="get" class="all-categories">
+    <button type="submit">All categories</button>
+  </form>
+{% endblock %}
+

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+  {% if categories %}
+  <ul class="category-list">
+    {% for category in categories %}
+    <li class="category-card">
+      <a href="{{ url_for('show_category', category_id=category.id) }}">
+        <h2>{{ category.title }}</h2>
+        <p>{{ category.contacts | length }} contact(s)</p>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p class="empty-state">Click "New category" to create a category to start adding contacts!</p>
+  {% endif %}
+{% endblock %}
+
+{% block header_links %}
+  <form action="{{ url_for('add_new_category') }}" method="get" class="new-category-form">
+    <button type="submit">New category</button>
+  </form>
+{% endblock %}

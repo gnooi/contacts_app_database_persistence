@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    background-color: #fff;
+    align-items: center;
+  }  
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 20px;
+  }
+
+.category-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    width: 50%;
+    max-width: 1200;
+    margin: 0 auto;
+}
+
+.category-card {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    transition: box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.category-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.category-card:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category-card h2 {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+}
+
+.category-card p {
+    margin: 0;
+    color: #666;
+}
+
+.contact-actions,
+.category-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 20px;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    width: 50%;
+    max-width: 1200;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    transition: box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.contact-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.contact-card:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card h2 {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+}
+
+.contact-card p {
+    margin: 0;
+    color: #666;
+}
+
+.empty-state {
+    font-style: italic;
+    color: #777;
+}
+
+.back-home {
+    font-weight: bold;
+}
+
+.flash {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 20px 0 1.5em 0;
+    color: #3399cc;
+    background: #CBE5F2;
+}
+
+.flash p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.flash.error {
+    color: #ff6633;
+    background: #FFCFBF;
+}
+
+.flash.success {
+    color: #33cc99;
+    background: #CBF2E5;
+}
+
+.page-header {
+    margin-bottom: 1rem;
+}
+
+.header-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-top h1 {
+    margin: 0;
+}
+
+.header-links {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .5rem;
+}
+
+.header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.add-contact .input-fields {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    justify-content: space-between;
+}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<header>
+  <h2>{{ category.title }}</h2>
+  <div class="header-actions">
+    <form class="add-contact"
+        method="POST"
+        action="{{ url_for('update_contact', category_id=category.id, contact_id=contact.id) }}">
+      
+      <div class="input-fields">
+        <div>
+          <label for="name">Name: </label>
+          <input type="text" name="name" id="name" value="{{ contact.name }}" required>
+        </div>
+
+        <div>
+          <label for="phone">Phone: </label>
+          <input type="tel" name="phone" id="phone" value="{{ contact.phone }}">
+        </div>
+
+        <div>
+          <label for="email">Email: </label>
+          <input type="email" name="email" id="email" value="{{ contact.email }}">
+        </div>
+        <button type="submit">Update contact</button>
+    </div>
+    </form>
+  </div>
+</header>
+{% endblock %}
+
+{% block header_links %}
+  <form action="{{ url_for('get_categories') }}" method="get" class="all-categories">
+    <button type="submit">All categories</button>
+  </form>
+{% endblock %}
+
