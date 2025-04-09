@@ -42,7 +42,8 @@ def require_contact(f):
     @require_category
     def decorated_function(category, *args, **kwargs):
         contact_id = kwargs.get('contact_id')
-        contact = find_contact_by_id(contact_id, category['contacts'])
+        contacts = g.storage.find_contacts_for_category(category['id'])
+        contact = find_contact_by_id(contact_id, contacts)
 
         if not contact:
             raise NotFound(description="Contact not found")
@@ -84,7 +85,10 @@ def add_new_category():
 @app.route("/categories/<int:category_id>")
 @require_category
 def show_category(category, category_id):
-    return render_template('category.html', category=category)
+    category = g.storage.find_category_by_id(category_id)
+    contacts = g.storage.find_contacts_for_category(category_id)
+    category['contacts'] = contacts
+    return render_template('category.html', category=category, contacts=contacts)
 
 @app.route("/categories/<int:category_id>/contacts", methods=["POST"])
 @require_category

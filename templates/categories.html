@@ -8,7 +8,7 @@
     <li class="category-card">
       <a href="{{ url_for('show_category', category_id=category.id) }}">
         <h2>{{ category.title }}</h2>
-        <p>{{ category.contacts | length }} contact(s)</p>
+        <p>{{ category.contacts_count }} contact(s)</p>
       </a>
     </li>
     {% endfor %}

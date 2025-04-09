@@ -51,7 +51,14 @@ class DatabasePersistence:
             connection.close()
 
     def get_all_categories(self):
-        query = "SELECT * FROM categories"
+        query = """
+            SELECT categories.*,
+                    COUNT(contacts.id) AS contacts_count
+            FROM categories
+            LEFT JOIN contacts ON contacts.category_id = categories.id
+            GROUP BY categories.id
+            ORDER BY categories.title
+        """
         logger.info("Executing query: %s", query)
         with self._database_connect() as connection:
             with connection.cursor(cursor_factory=DictCursor) as cursor:
@@ -59,14 +66,17 @@ class DatabasePersistence:
                 results = cursor.fetchall()
 
         categories = [dict(result) for result in results]
-        for category in categories:
-            contacts = self._find_contacts_for_category(category['id'])
-            category.setdefault('contacts', contacts)
-
         return categories
     
     def find_category_by_id(self, category_id):
-        query = "SELECT * FROM categories WHERE id = %s"
+        query = """
+            SELECT categories.*,
+                    COUNT(contacts.id) AS contacts_count
+            FROM categories
+            LEFT JOIN contacts ON contacts.category_id = categories.id
+            WHERE categories.id = %s
+            GROUP BY categories.id
+        """
         logger.info("Executing query: %s with category_id: %s", 
                     query, category_id)
         with self._database_connect() as connection:
@@ -74,11 +84,9 @@ class DatabasePersistence:
                 cursor.execute(query, (category_id, ))
                 category = dict(cursor.fetchone())
 
-        contacts = self._find_contacts_for_category(category_id)
-        category.setdefault('contacts', contacts)
         return category
     
-    def _find_contacts_for_category(self, category_id):
+    def find_contacts_for_category(self, category_id):
         query = "SELECT * FROM contacts WHERE category_id = %s"
         logger.info("Executing query: %s with category_id: %s", query, category_id)
         with self._database_connect() as connection:
